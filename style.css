@@ -1,0 +1,45 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: #6b6868c0 ;
+    color: #ffff;
+    font-family: 'Times New Roman', Times, serif;
+} 
+.container{
+    width:500px;
+    margin: 20px auto;
+}
+.cabeçario{
+    padding: 1.75rem;
+    text-align: center;
+    background-color: #000;
+}
+.cabeçario h1{
+    font-size: 2.50rem;
+}
+.data{
+    font-size: 0.75rem;
+    text-align: right;
+    padding: 0.5rem 2rem 0.5rem 0;
+    background-color: #2f00ff;
+}
+ul.moedas{
+    height: 200px;
+    background-color: #000;
+}
+.adicionar-botao-moedas{
+    color: #ffff;
+    background-color: #1eca35;
+    padding: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: hold;
+    border:none;
+    border-top: 3px solid #000;
+    outline:none;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
