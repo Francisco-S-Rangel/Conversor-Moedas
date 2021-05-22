@@ -4,7 +4,7 @@
     margin: 0;
 }
 body {
-    background-color: #6b6868c0 ;
+    background-color: #48b0f5;
     color: #ffff;
     font-family: 'Times New Roman', Times, serif;
 } 
@@ -15,25 +15,88 @@ body {
 .cabeçario{
     padding: 1.75rem;
     text-align: center;
-    background-color: #000;
+    background-color: #8b8787;
 }
 .cabeçario h1{
-    font-size: 2.50rem;
+    font-size: 2.25rem;
 }
 .data{
     font-size: 0.75rem;
     text-align: right;
-    padding: 0.5rem 2rem 0.5rem 0;
-    background-color: #2f00ff;
+    padding: 0.75rem 2rem 0.75rem 0;
+    background-color: #000;
 }
 ul.moedas{
-    height: 200px;
+    height: calc( 100vh - 40px - 100px - 40px - 58px);
     background-color: #000;
+    padding: 0 1.5rem 1rem 1.5rem;
+}
+ul.moedas li{
+    background-color: grey;
+    border-radius:5px;
+    list-style: none;
+    padding:1rem 1rem 0.75rem 1rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+ul.moedas li:last-child{
+    margin-bottom: 0;
+}
+ul.moedas li.moedas-moeda-base{
+    background-color: #264d73;
+}
+.bandeira{
+    width: 60px;
+    height:40px;
+    border: 1px solid #ffff;
+    vertical-align: top;
+}
+.info {
+    display: inline-block;
+    width: 80%;
+}
+.info .input span{
+    font-size: 1.5rem;
+    display: inline-block;
+    width: 4rem;
+    text-align: center;
+}
+.info .input input{
+    font-size: 1.5rem;
+    width: 78%;
+    background-color: transparent;
+    border: 2px solid #ffff;
+    border-radius: 5px;
+    color: #ffff;
+    padding: 0.3rem;
+    margin-bottom: 0.75rem;
+}
+.info .nome-moeda{
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-left:4rem;
+}
+.info .base-moeda-taxa{
+    font-size: 0.5rem;
+    margin-left: 4rem;
+}
+ul.moedas li .fechar{
+    position:absolute;
+    top:0;
+    right:0;
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+    color: #ff0000;
+    cursor: pointer;
+}
+ul.moedas li.fechar:hover {
+    color: #fff;
 }
 .adicionar-botao-moedas{
     color: #ffff;
     background-color: #1eca35;
-    padding: 0.75rem;
+    padding: 1rem;
     font-size: 1.2rem;
     font-weight: hold;
     border:none;
