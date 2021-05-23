@@ -12,6 +12,8 @@ body {
     width:500px;
     margin: 20px auto;
     position:relative;
+    overflow-x: hidden;
+    user-select: none;
 }
 .cabeçario{
     padding: 1.75rem;
@@ -98,17 +100,22 @@ ul.moedas li.fechar:hover {
 ul.adicionar-lista-moedas{
     position: absolute;
     bottom: 54px;
-    left: 0;
     background-color: #fff;
     color:#000;
     width:100%;
-    height: calc(100vh - 40px - 100px  - 55px);
+    height: calc(100vh - 40px - 100px - 55px);;
     overflow-y: auto;
+    transition: all 0.25s;
+    left: 105%;
 }
 ul.adicionar-lista-moedas li{
     list-style: none;
     padding: 0.75rem;
     border-bottom: 1px solid #ddd;
+}
+ul.adicionar-lista-moedas li.disabled{
+    opacity: 0.5;
+    cursor:not-allowed;
 }
 ul.adicionar-lista-moedas li.bandeira{
     width: 3rem;
@@ -131,4 +138,26 @@ ul.adicionar-lista-moedas li span{
     width: 100%;
     cursor: pointer;
     transition: background-color 0.25s;
+}
+.adicionar-botao-moedas.open{
+    background-color: #ff0000;
+}
+.adicionar-botao-moedas.open + ul.adicionar-lista-moedas{
+    left:0;
+}
+adicionar-botao-moedas.open + ul.adicionar-lista-moedas li:hover{
+    background-color:#fff;
+}
+
+@media (max-width: 600px){
+    html{ font-size: 14px;}
+    .container { width: 100%; margin: 0 auto;}
+    ul.moedas {height: calc( 100vh - 40px - 100px - 40px - 58px);}
+    header h1{font-size: 2rem;}
+    .bandeira{width: 3rem;height: 2rem;}
+    .info .input span{font-size: 1.25rem;width: 3.5rem;}
+    .info .input input{font-size: 1.25rem;width: 76%;}
+    .info .nome-moeda{margin-left:3.5rem;}
+    .info .base-moeda-taxa{margin-left: 3.5rem;}
+    ul.adicionar-lista-moedas {bottom: 48px;height: calc(100vh - 80px - 51px);}
 }
