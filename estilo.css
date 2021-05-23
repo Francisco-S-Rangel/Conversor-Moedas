@@ -11,6 +11,7 @@ body {
 .container{
     width:500px;
     margin: 20px auto;
+    position:relative;
 }
 .cabeçario{
     padding: 1.75rem;
@@ -30,6 +31,7 @@ ul.moedas{
     height: calc( 100vh - 40px - 100px - 40px - 58px);
     background-color: #000;
     padding: 0 1.5rem 1rem 1.5rem;
+    overflow-y: auto;
 }
 ul.moedas li{
     background-color: grey;
@@ -92,6 +94,30 @@ ul.moedas li .fechar{
 }
 ul.moedas li.fechar:hover {
     color: #fff;
+}
+ul.adicionar-lista-moedas{
+    position: absolute;
+    bottom: 54px;
+    left: 0;
+    background-color: #fff;
+    color:#000;
+    width:100%;
+    height: calc(100vh - 40px - 100px  - 55px);
+    overflow-y: auto;
+}
+ul.adicionar-lista-moedas li{
+    list-style: none;
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+ul.adicionar-lista-moedas li.bandeira{
+    width: 3rem;
+    height: 2rem;
+    vertical-align: middle;
+}
+ul.adicionar-lista-moedas li span{
+    margin-left: 1rem;
+    font-weight: bold;
 }
 .adicionar-botao-moedas{
     color: #ffff;
