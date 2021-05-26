@@ -2,127 +2,156 @@
 
 const addCurrencyBtn = document.querySelector(".adicionar-botao-moedas");
 const addCurrencyList = document.querySelector(".adicionar-lista-moedas");
+const currenciesList = document.querySelector(".moedas");
+
+const dataURL = "https://api.exchangeratesapi.io/latest";
+
+const initiallyDisplayedCurrencies = ["BRL", "USD", "EUR", "GBP", "CAD"];
+let baseCurrency;
+let baseCurrencyAmount;
+
+
 const currencies = [
 {
     name: "Real Brasileiro",
     abbreviation: "BRL",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/br.gif"
+    flagURL: "http://www.geonames.org/flags/l/br.gif",
+    rate: 5.37
 },
 {
     name: "Dolar Americano",
     abbreviation: "USD",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/us.gif"
+    flagURL: "http://www.geonames.org/flags/l/us.gif",
+    rate: 1
 },
 {
     name: "Euro",
     abbreviation: "EUR",
     symbol: "$",
-    flagURL: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg"
+    flagURL: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Flag_of_Europe.svg",
+    rate: 0.82
 },
 {
     name: "Libra esterlina",
     abbreviation: "GBP",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/uk.gif"
+    flagURL: "http://www.geonames.org/flags/l/uk.gif",
+    rate: 0.71
 },
 {
     name: "Dolar Canadense",
     abbreviation: "CAD",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/ca.gif"
+    flagURL: "http://www.geonames.org/flags/l/ca.gif",
+    rate: 1.21
 },
 {
     name: "Iene Japonês",
     abbreviation: "JPY",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/jp.gif"
+    flagURL: "http://www.geonames.org/flags/l/jp.gif",
+    rate: 108.93
 },
 {
     name: "Dolar Australiano",
     abbreviation: "AUD",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/au.gif"
+    flagURL: "http://www.geonames.org/flags/l/au.gif",
+    rate: 1.29
 },
 {
     name: "Yuan Renminbi Chinês",
     abbreviation: "CNY",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/cn.gif"
+    flagURL: "http://www.geonames.org/flags/l/cn.gif",
+    rate: 6.43
 },
 {
     name: "Peso Mexicano",
     abbreviation: "MXN",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/mx.gif"
+    flagURL: "http://www.geonames.org/flags/l/mx.gif",
+    rate: 19.95
 },
 {
     name: "Dolar de Hong Kong",
     abbreviation: "HKD",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/hk.gif"
+    flagURL: "http://www.geonames.org/flags/l/hk.gif",
+    rate: 7.76
 },
 {
     name: "Rublo Russo",
     abbreviation: "RUB",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/ru.gif"
+    flagURL: "http://www.geonames.org/flags/l/ru.gif",
+    rate:  73.62 
 },
 {
     name: "Franco Suiço",
     abbreviation: "CHF",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/ch.gif"
+    flagURL: "http://www.geonames.org/flags/l/ch.gif",
+    rate: 0.90 
 },
 {
     name: "Rand Sul Africano",
     abbreviation: "ZAR",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/za.gif"
+    flagURL: "http://www.geonames.org/flags/l/za.gif",
+    rate: 13.96
 },
 {
     name: "Shekel Israelita",
     abbreviation: "ILS",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/il.gif"
+    flagURL: "http://www.geonames.org/flags/l/il.gif",
+    rate: 3.26
 },
 {
     name: "Won Sul Coreano",
     abbreviation: "KRW",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/kr.gif"
+    flagURL: "http://www.geonames.org/flags/l/kr.gif",
+    rate: 1127.79
 },
 {
     name: "Peso Argentino",
     abbreviation: "ARS",
     symbol: "$",
-    flagURL: "https://img.geonames.org/flags/x/ar.gif"
+    flagURL: "https://img.geonames.org/flags/x/ar.gif",
+    rate: 94.20
 },
 {
     name: "Dolar de Singapura",
     abbreviation: "SGD",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/sg.gif"
+    flagURL: "http://www.geonames.org/flags/l/sg.gif",
+    rate: 1.33
 },
 {
     name: "Pupia Indiana",
     abbreviation: "IDR",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/id.gif"
+    flagURL: "http://www.geonames.org/flags/l/id.gif",
+    rate: 72.91
 },
 {
     name: "Dolar Neozelandês",
     abbreviation: "NZD",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/nz.gif"
+    flagURL: "http://www.geonames.org/flags/l/nz.gif",
+    rate: 1.39
 },
 {
     name: "Lira Turca",
     abbreviation: "TRY",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/tr.gif"
-  },
+    flagURL: "http://www.geonames.org/flags/l/tr.gif",
+    rate: 8.42
+},
 ];
 
 // Eventos
@@ -137,9 +166,42 @@ function populateaddCurrencyList(){
      for(let i=0;i<currencies.length;i++){
          addCurrencyList.insertAdjacentHTML(
              "beforeend",
-             `<li moeda-atual="USD" class="disabled">
-             <img src="http://www.geonames.org/flags/l/us.gif" class="bandeira"><span>USD - Dolar Americano</span>
+             `<li moeda-atual=${currencies[i].abbreviation}>
+             <img src=${currencies[i].flagURL} class="bandeira"><span>${currencies[i].abbreviation} - ${currencies[i].name}</span>
              </li>`);
      }
 }
-populateaddCurrencyList();
+function populateCurrenciesList() {
+    for(let i=0; i<initiallyDisplayedCurrencies.length; i++) {
+      const currency = currencies.find(c => c.abbreviation===initiallyDisplayedCurrencies[i]);
+      if(currency) newCurrenciesListItem(currency);
+    }
+  }
+  
+  function newCurrenciesListItem(currency) {
+    if(currenciesList.childElementCount===0) {
+      baseCurrency = currency.abbreviation;
+      baseCurrencyAmount = 0;
+    }
+    addCurrencyList.querySelector(`[moeda-atual=${currency.abbreviation}]`).classList.add("disabled");
+    const baseCurrencyRate = currencies.find(c => c.abbreviation===baseCurrency).rate;
+    const exchangeRate = currency.abbreviation===baseCurrency ? 1 : (currency.rate/baseCurrencyRate).toFixed(4);
+    const inputValue = baseCurrencyAmount ? (baseCurrencyAmount*exchangeRate).toFixed(4) : "";
+  
+    currenciesList.insertAdjacentHTML(
+        "beforeend",
+        `<li class="moedas ${currency.abbreviation===baseCurrency ? "moedas-moeda-base" : ""}" id=${currency.abbreviation}>
+            <img src= ${currency.flagURL} class="bandeira">
+             <div class="info">
+                 <p class="entrada"> $ <span class="moeda-simbolo"></span><input placeholder="0.0000" value=${inputValue}></p>
+                 <P class="nome-moeda">${currency.abbreviation} - ${currency.name}</P>
+                 <p class="base-moeda-taxa">1 ${baseCurrency} = ${exchangeRate} ${currency.abbreviation}</p>
+             </div>
+             <span class="fechar">&times;</span>
+        </li>`);
+  }
+  
+  populateaddCurrencyList();
+  populateCurrenciesList();
+ 
+
