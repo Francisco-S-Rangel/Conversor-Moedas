@@ -161,7 +161,64 @@ function addCurrencyBtnClick(event){
     addCurrencyBtn.classList.toggle("open");
 }
 
+// função que permite a adição de mais moedas na lista principal;
+addCurrencyList.addEventListener("click", addCurrencyListClick);
+function addCurrencyListClick(event){
+    const clickedListItem = event.target.closest("li");
+    if (!clickedListItem.classList.contains("disabled")){
+        const newCurrency = currencies.find( c => c.abbreviation===clickedListItem.getAttribute("moeda-atual"));
+        if(newCurrency) newCurrenciesListItem(newCurrency);
+    }
+}
+
+// função que permite retirar uma moeda da lista principal;
+currenciesList.addEventListener("click", CurrenciesListClick);
+
+function CurrenciesListClick(event){
+    if(event.target.classList.contains("fechar")){
+        const parentNode = event.target.parentNode;
+        parentNode.remove();
+        addCurrencyList.querySelector(`[moeda-atual=${parentNode.id}]`).classList.remove("disabled");
+        if(parentNode.classList.constains("moeda-atual")){
+            const newBaseCurrencyLI = currenciesList.querySelector(".moedas");
+            if(newBaseCurrencyLI){
+                setNewBaseCurrency(newBaseCurrencyLI);
+                baseCurrencyAmount = Number(newBaseCurrencyLI.querySelector(".entrada entrada").value);
+            }
+        }
+    }
+}
+
+function currenciesListClick(event) {
+  if(event.target.classList.contains("fechar")) {
+    const parentNode = event.target.parentNode;
+    parentNode.remove();
+    addCurrencyList.querySelector(`[moeda-atual=${parentNode.id}]`).classList.remove("disabled");
+    if(parentNode.classList.contains("moeda-atual")) {
+      const newBaseCurrencyLI = currenciesList.querySelector(".moedas");
+      if(newBaseCurrencyLI) {
+        setNewBaseCurrency(newBaseCurrencyLI);
+        baseCurrencyAmount = Number(newBaseCurrencyLI.querySelector(".input entrada").value);
+      }
+    }
+  }
+}
+
+
+//função que estabelece a moeda escolhida para ser a principal 
+function setNewBaseCurrency(newBaseCurrencyLI){
+    newBaseCurrencyLI.classList.add("moeda-atual");
+    baseCurrency = newBaseCurrencyLI.id;
+    const baseCurrencyRate = currencies.find(currency => currency.abbreviation===baseCurrency).rate;
+    currenciesList.querySelectorAll(".moedas").forEach(currencyLI => {
+      const baseCurrencyRate = currencies.find(c => c.abbreviation===currencyLI.id).rate;
+      const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currency.rate/baseCurrencyRate).toFixed(4);
+      currencyLI.querySelector(".base_moeda-taxa").textContent = `1 ${baseCurrency} = ${exchangeRate} ${currency.id}`;
+    });
+}
+
 //Função Auxiliar 
+// Função que impoem no botão adicionar todas as moedas da lista;
 function populateaddCurrencyList(){
      for(let i=0;i<currencies.length;i++){
          addCurrencyList.insertAdjacentHTML(
@@ -171,6 +228,7 @@ function populateaddCurrencyList(){
              </li>`);
      }
 }
+// Função que impoem as primeiras moedas que o Sistema vai começar;
 function populateCurrenciesList() {
     for(let i=0; i<initiallyDisplayedCurrencies.length; i++) {
       const currency = currencies.find(c => c.abbreviation===initiallyDisplayedCurrencies[i]);
