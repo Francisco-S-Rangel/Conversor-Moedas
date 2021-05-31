@@ -223,6 +223,21 @@ function currenciesListInputChange(event){
     }
 }
 
+currenciesList.addEventListener("focusout", currenciesListFocusOut);
+
+function currenciesListFocusOut(event){
+    const inputValue = event.target.value;
+    if(isNaN(inputValue) || Number(inputValue)===0) event.target.value = "";
+    else event.target.value = Number(inputValue).toFixed(4);
+}
+
+//função que encerra o inserir do valor da moeda caso a tecla "Enter" seja precionada
+currenciesList.addEventListener("keydown", currenciesListKeyDown);
+
+function currenciesListKeyDown(event) {
+  if(event.key==="Enter") event.target.blur();
+}
+
 //Função Auxiliar 
 // Função que impoem no botão adicionar todas as moedas da lista;
 function populateaddCurrencyList(){
