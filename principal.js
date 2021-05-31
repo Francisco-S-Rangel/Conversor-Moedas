@@ -200,6 +200,29 @@ function setNewBaseCurrency(newBaseCurrencyLI) {
   });
 }
 
+//currenciesListInputChange permite o inserir e faz o calculo em outras moedas (Ps:A propria conversão)
+currenciesList.addEventListener("input", currenciesListInputChange);
+
+function currenciesListInputChange(event){
+    const isNewBaseCurrency = event.target.closest("li").id!==baseCurrency;
+    if(isNewBaseCurrency){
+        currenciesList.querySelector(`#${baseCurrency}`).classList.remove("moeda-atual");
+        setNewBaseCurrency(event.target.closest("li"));
+    }
+    const newBaseCurrencyAmount = isNaN(event.target.value) ? 0 : Number(event.target.value);
+    if(baseCurrencyAmount!==newBaseCurrencyAmount || isNewBaseCurrency){
+        baseCurrencyAmount = newBaseCurrencyAmount;
+        const baseCurrencyRate = currencies.find( currency => currency.abbreviation===baseCurrency).rate;
+        currenciesList.querySelectorAll(".moedas").forEach(currencyLI => {
+        if(currencyLI.id!==baseCurrency){
+        const currencyRate = currencies.find(currency => currency.abbreviation===currencyLI.id).rate;
+        const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currencyRate/baseCurrencyRate).toFixed(4);
+        currencyLI.querySelector(".entrada input").value = exchangeRate*baseCurrencyAmount!==0 ? (exchangeRate*baseCurrencyAmount).toFixed(4) : "";
+        }
+        });
+    }
+}
+
 //Função Auxiliar 
 // Função que impoem no botão adicionar todas as moedas da lista;
 function populateaddCurrencyList(){
