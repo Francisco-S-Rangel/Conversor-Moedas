@@ -4,7 +4,6 @@ const addCurrencyBtn = document.querySelector(".adicionar-botao-moedas");
 const addCurrencyList = document.querySelector(".adicionar-lista-moedas");
 const currenciesList = document.querySelector(".moedas");
 
-const dataURL = "https://api.exchangeratesapi.io/latest";
 
 const initiallyDisplayedCurrencies = ["BRL", "USD", "EUR", "GBP", "CAD"];
 let baseCurrency;
@@ -280,7 +279,17 @@ function populateCurrenciesList() {
         </li>`);
   }
   
+  //função que formta a data atual 
+  function formataData(data = new Date()){
+      var dia = data.getDay();
+      var mes = data.getMonth()+1;
+      var ano = data.getFullYear();
+      if(dia.toString().length ==1) dia = '0' + dia;
+      if(mes.toString().length ==1) mes = '0' + mes;
+      return dia+'/'+mes+'/'+ano;
+  }
+
+  document.querySelector(".data").textContent = formataData();
   populateaddCurrencyList();
   populateCurrenciesList();
  
-
