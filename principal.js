@@ -135,7 +135,7 @@ const currencies = [
     name: "Pupia Indiana",
     abbreviation: "IDR",
     symbol: "$",
-    flagURL: "http://www.geonames.org/flags/l/id.gif",
+    flagURL: "http://www.geonames.org/flags/l/in.gif",
     rate: 72.91
 },
 {
@@ -163,32 +163,16 @@ function addCurrencyBtnClick(event){
 
 // função que permite a adição de mais moedas na lista principal;
 addCurrencyList.addEventListener("click", addCurrencyListClick);
-function addCurrencyListClick(event){
-    const clickedListItem = event.target.closest("li");
-    if (!clickedListItem.classList.contains("disabled")){
-        const newCurrency = currencies.find( c => c.abbreviation===clickedListItem.getAttribute("moeda-atual"));
-        if(newCurrency) newCurrenciesListItem(newCurrency);
-    }
+function addCurrencyListClick(event) {
+  const clickedListItem = event.target.closest("li");
+  if(!clickedListItem.classList.contains("disabled")) {
+    const newCurrency = currencies.find(c => c.abbreviation===clickedListItem.getAttribute("moeda-atual"));
+    if(newCurrency) newCurrenciesListItem(newCurrency);
+  }
 }
 
 // função que permite retirar uma moeda da lista principal;
-currenciesList.addEventListener("click", CurrenciesListClick);
-
-function CurrenciesListClick(event){
-    if(event.target.classList.contains("fechar")){
-        const parentNode = event.target.parentNode;
-        parentNode.remove();
-        addCurrencyList.querySelector(`[moeda-atual=${parentNode.id}]`).classList.remove("disabled");
-        if(parentNode.classList.constains("moeda-atual")){
-            const newBaseCurrencyLI = currenciesList.querySelector(".moedas");
-            if(newBaseCurrencyLI){
-                setNewBaseCurrency(newBaseCurrencyLI);
-                baseCurrencyAmount = Number(newBaseCurrencyLI.querySelector(".entrada entrada").value);
-            }
-        }
-    }
-}
-
+currenciesList.addEventListener("click", currenciesListClick);
 function currenciesListClick(event) {
   if(event.target.classList.contains("fechar")) {
     const parentNode = event.target.parentNode;
@@ -198,23 +182,22 @@ function currenciesListClick(event) {
       const newBaseCurrencyLI = currenciesList.querySelector(".moedas");
       if(newBaseCurrencyLI) {
         setNewBaseCurrency(newBaseCurrencyLI);
-        baseCurrencyAmount = Number(newBaseCurrencyLI.querySelector(".input entrada").value);
+        baseCurrencyAmount = Number(newBaseCurrencyLI.querySelector(".entrada input").value);
       }
     }
   }
 }
 
-
 //função que estabelece a moeda escolhida para ser a principal 
-function setNewBaseCurrency(newBaseCurrencyLI){
-    newBaseCurrencyLI.classList.add("moeda-atual");
-    baseCurrency = newBaseCurrencyLI.id;
-    const baseCurrencyRate = currencies.find(currency => currency.abbreviation===baseCurrency).rate;
-    currenciesList.querySelectorAll(".moedas").forEach(currencyLI => {
-      const baseCurrencyRate = currencies.find(c => c.abbreviation===currencyLI.id).rate;
-      const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currency.rate/baseCurrencyRate).toFixed(4);
-      currencyLI.querySelector(".base_moeda-taxa").textContent = `1 ${baseCurrency} = ${exchangeRate} ${currency.id}`;
-    });
+function setNewBaseCurrency(newBaseCurrencyLI) {
+  newBaseCurrencyLI.classList.add("moeda-atual");
+  baseCurrency = newBaseCurrencyLI.id;
+  const baseCurrencyRate = currencies.find(currency => currency.abbreviation===baseCurrency).rate;
+  currenciesList.querySelectorAll(".moedas").forEach(currencyLI => {
+    const currencyRate = currencies.find(currency => currency.abbreviation===currencyLI.id).rate;
+    const exchangeRate = currencyLI.id===baseCurrency ? 1 : (currencyRate/baseCurrencyRate).toFixed(4);
+    currencyLI.querySelector(".base-moeda-taxa").textContent = `1 ${baseCurrency} = ${exchangeRate} ${currencyLI.id}`;
+  });
 }
 
 //Função Auxiliar 
