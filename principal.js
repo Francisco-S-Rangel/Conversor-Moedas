@@ -9,14 +9,15 @@ const initiallyDisplayedCurrencies = ["BRL", "USD", "EUR", "GBP", "CAD"];
 let baseCurrency;
 let baseCurrencyAmount;
 
-
+// currencies é um array com todas as moedas usadas no software, o valor de todas
+// foram atualizados no dia 01/06/2021. 
 const currencies = [
 {
     name: "Real Brasileiro",
     abbreviation: "BRL",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/br.gif",
-    rate: 5.37
+    rate: 5.19
 },
 {
     name: "Dolar Americano",
@@ -44,14 +45,14 @@ const currencies = [
     abbreviation: "CAD",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/ca.gif",
-    rate: 1.21
+    rate: 1.20
 },
 {
     name: "Iene Japonês",
     abbreviation: "JPY",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/jp.gif",
-    rate: 108.93
+    rate: 109.46
 },
 {
     name: "Dolar Australiano",
@@ -65,14 +66,14 @@ const currencies = [
     abbreviation: "CNY",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/cn.gif",
-    rate: 6.43
+    rate: 6.38
 },
 {
     name: "Peso Mexicano",
     abbreviation: "MXN",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/mx.gif",
-    rate: 19.95
+    rate: 19.94
 },
 {
     name: "Dolar de Hong Kong",
@@ -86,7 +87,7 @@ const currencies = [
     abbreviation: "RUB",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/ru.gif",
-    rate:  73.62 
+    rate:  73.51
 },
 {
     name: "Franco Suiço",
@@ -100,56 +101,63 @@ const currencies = [
     abbreviation: "ZAR",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/za.gif",
-    rate: 13.96
+    rate: 13.75
 },
 {
     name: "Shekel Israelita",
     abbreviation: "ILS",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/il.gif",
-    rate: 3.26
+    rate: 3.24
 },
 {
     name: "Won Sul Coreano",
     abbreviation: "KRW",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/kr.gif",
-    rate: 1127.79
+    rate: 1107.46
 },
 {
     name: "Peso Argentino",
     abbreviation: "ARS",
     symbol: "$",
     flagURL: "https://img.geonames.org/flags/x/ar.gif",
-    rate: 94.20
+    rate: 94.73
 },
 {
     name: "Dolar de Singapura",
     abbreviation: "SGD",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/sg.gif",
-    rate: 1.33
+    rate: 1.32
 },
 {
-    name: "Pupia Indiana",
+    name: "Rupia Indiana",
     abbreviation: "IDR",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/in.gif",
-    rate: 72.91
+    rate: 72.88
 },
 {
     name: "Dolar Neozelandês",
     abbreviation: "NZD",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/nz.gif",
-    rate: 1.39
+    rate: 1.38
 },
 {
     name: "Lira Turca",
     abbreviation: "TRY",
     symbol: "$",
     flagURL: "http://www.geonames.org/flags/l/tr.gif",
-    rate: 8.42
+    rate: 8.51
+},
+{
+    name: "Peso Chileno",
+    abbreviation: "CLP" ,
+    symbol: "$",
+    flagURL: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Flag_of_Chile.svg/1024px-Flag_of_Chile.svg.png",
+    rate: 723.10
 },
 ];
 
