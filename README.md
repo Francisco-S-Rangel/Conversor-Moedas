@@ -1,4 +1,6 @@
-Francisco Rangel - RA: 1840482012054             Matheus Henrique Ramires - RA: 1840482012022
+Francisco Rangel - RA: 1840482012054 
+
+Matheus Henrique Ramires - RA: 1840482012022
 
 
 
